@@ -10,7 +10,6 @@ RUN yarn
 RUN npm i
 
 COPY index.js .env /usr/src/app/
-EXPOSE 3000
 
 CMD [ "npm", "start" ]
 

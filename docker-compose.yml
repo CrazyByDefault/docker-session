@@ -1,0 +1,32 @@
+version: '2.2'
+
+services:
+  frontend:
+    image: react-app:latest
+    ports:
+      - "3000:3000"
+    links:
+      - backend
+
+  backend:
+    image: dbconn:latest
+    ports:
+      - "5000:8080"
+    links:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: abc123
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./.data/mysql:/var/lib/mysql"
+      - "./test_data.sql:/docker-entrypoint-initdb.d/init.sql"
+    environment:
+      SERVICE_NAME: mariadb
+      MYSQL_ROOT_PASSWORD: abc123
+      MYSQL_DATABASE: iith-ems

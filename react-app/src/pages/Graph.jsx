@@ -31,7 +31,7 @@ class Graph extends React.Component  {
   }
 
   _refreshData() {
-    Request.get('http://4f5a1b2f.ngrok.io').query(`panel=${this.state.activePanel}`).then((res) => {
+    Request.get('http://localhost:5000').query(`panel=${this.state.activePanel}`).then((res) => {
       console.log(res.body);
       this.setState({ data: res.body, autoload: true });
     });
@@ -44,7 +44,7 @@ class Graph extends React.Component  {
       <div>
         <Row justify="center">
           <Col span={24} justify="center">
-            <ChartCard title="SmartGrid Project" contentHeight={134} style={{ maxWidth: "65vw", margin: "auto" }}>
+            <ChartCard title="Docker Session" contentHeight={134} style={{ maxWidth: "65vw", margin: "auto" }}>
                 <NumberInfo
                   subTitle={<span>{ this.state.activePanel ? this.state.activePanel : "Select a Panel" }</span>}
                   total={this.state.data[this.state.data.length-1] ? this.state.data[this.state.data.length-1].y : 0}
@@ -73,7 +73,7 @@ class Graph extends React.Component  {
     setInterval(async () => {
       if (!this.state.autoload) return;
       Request
-        .get('http://4f5a1b2f.ngrok.io')
+        .get('http://localhost:5000')
         .query(`panel=${this.state.activePanel}`)
         .then((res) => {
           console.log(res.body);
