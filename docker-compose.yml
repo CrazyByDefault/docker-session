@@ -5,8 +5,6 @@ services:
     image: react-app:latest
     ports:
       - "3000:3000"
-    links:
-      - backend
 
   backend:
     image: dbconn:latest
@@ -17,7 +15,7 @@ services:
     environment:
       DB_HOST: db
       DB_USER: root
-      DB_PASS: abc123
+      DB_PASS: securepassword
       DB_NAME: iith_ems
 
   db:
@@ -29,5 +27,5 @@ services:
       - "./test_data.sql:/docker-entrypoint-initdb.d/init.sql"
     environment:
       SERVICE_NAME: mysql
-      MYSQL_ROOT_PASSWORD: abc123
+      MYSQL_ROOT_PASSWORD: securepassword
       MYSQL_DATABASE: iith_ems
